@@ -18,6 +18,7 @@ namespace WellMonitor.Infrastructure.DependencyResolver
             services.AddScoped<IRepositoryBase<WellEntity>, WellRepository>();
             services.AddScoped<IRepositoryBase<CompanyEntity>, CompanyRepository>();
             services.AddScoped<IRepositoryBase<TelemetryEntity>, TelemetryRepository>();
+            services.AddScoped<IRepositoryBase<WellActivityDeadlineEntity>, WellActivityDeadlineRepository>();
             services.AddScoped<IUnitOfWork, ApplicationUnitOfWork>();
             services.AddTransient<DbInitializer>();
             //services.Configure<DbInitializationOptions>(options =>

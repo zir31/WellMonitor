@@ -12,6 +12,8 @@ namespace WellMonitor.Infrastructure
         
         public DbSet<TelemetryEntity> t_telemetry { get; set; }
 
+        public DbSet<WellActivityDeadlineEntity> t_well_deadline { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

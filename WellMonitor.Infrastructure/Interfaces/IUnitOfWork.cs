@@ -11,6 +11,8 @@ namespace WellMonitor.Infrastructure.Interfaces
 
         IRepositoryBase<TelemetryEntity> TelemetryRepository { get; set; }
 
+        IRepositoryBase<WellActivityDeadlineEntity> WellActivityDeadlineRepository { get; set; }
+
         Task SaveChangesAsync();
     }
 }
