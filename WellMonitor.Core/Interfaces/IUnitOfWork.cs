@@ -1,7 +1,6 @@
 ﻿using WellMonitor.Core.Entities;
-using WellMonitor.Core.Interfaces;
 
-namespace WellMonitor.Infrastructure.Interfaces
+namespace WellMonitor.Core.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

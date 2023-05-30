@@ -1,6 +1,5 @@
 ﻿using WellMonitor.Core.Entities;
 using WellMonitor.Core.Interfaces;
-using WellMonitor.Infrastructure.Interfaces;
 
 namespace WellMonitor.Infrastructure
 {

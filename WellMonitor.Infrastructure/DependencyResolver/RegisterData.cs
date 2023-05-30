@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using WellMonitor.Core.Entities;
 using WellMonitor.Core.Interfaces;
 using WellMonitor.Infrastructure.Helpers;
-using WellMonitor.Infrastructure.Interfaces;
 using WellMonitor.Infrastructure.Repositories;
 
 namespace WellMonitor.Infrastructure.DependencyResolver
