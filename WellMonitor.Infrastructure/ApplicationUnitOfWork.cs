@@ -11,17 +11,20 @@ namespace WellMonitor.Infrastructure
         public IRepositoryBase<WellEntity> WellRepository { get; set; }
         public IRepositoryBase<CompanyEntity> CompanyRepository { get; set; }
         public IRepositoryBase<TelemetryEntity> TelemetryRepository { get; set; }
+        public IRepositoryBase<WellActivityDeadlineEntity> WellActivityDeadlineRepository { get; set; }
 
         public ApplicationUnitOfWork(ApplicationDbContext context,
             IRepositoryBase<WellEntity> wellRepository,
             IRepositoryBase<CompanyEntity> companyRepository,
-            IRepositoryBase<TelemetryEntity> telemetryRepository)
+            IRepositoryBase<TelemetryEntity> telemetryRepository,
+            IRepositoryBase<WellActivityDeadlineEntity> wellActivityDeadlineRepository)
 
         {
             _context = context;
             WellRepository = wellRepository;
             CompanyRepository = companyRepository;
             TelemetryRepository = telemetryRepository;
+            WellActivityDeadlineRepository = wellActivityDeadlineRepository;
         }
 
         public async Task SaveChangesAsync()
