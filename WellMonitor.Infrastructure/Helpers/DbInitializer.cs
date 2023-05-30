@@ -78,6 +78,24 @@ namespace WellMonitor.Infrastructure.Helpers
         {
             // Default data
             // Seed, if necessary
+            if (!_context.t_company.Any())
+            {
+                _context.t_company.AddRange(
+                    new CompanyEntity
+                    {
+                        Id = 1,
+                        Name = "First Company"
+                    },
+                    new CompanyEntity
+                    {
+                        Id = 2,
+                        Name = "Second Company"
+                    }
+                    );
+
+                await _context.SaveChangesAsync();
+            }
+
             if (!_context.t_well.Any())
             {
                 _context.t_well.AddRange(
@@ -86,25 +104,23 @@ namespace WellMonitor.Infrastructure.Helpers
                     Id = 1,
                     Name = "First Well",
                     Id_company = 1,
-                    Id_telemetry = 1,
-                    Active = 0
+                    Active = false
                     },
                     new WellEntity
                     {
                         Id = 2,
                         Name = "Second Well",
                         Id_company = 1,
-                        Id_telemetry = 2,
-                        Active = 0
+                        Active = false
                     },
                     new WellEntity
                     {
                         Id = 3,
                         Name = "Third Well",
                         Id_company = 2,
-                        Id_telemetry = 3,
+                        Active = false
                     }
-                    ); ;
+                    );
 
                 await _context.SaveChangesAsync();
             }

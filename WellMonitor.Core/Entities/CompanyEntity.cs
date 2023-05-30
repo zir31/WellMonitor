@@ -7,5 +7,7 @@ namespace WellMonitor.Core.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public IEnumerable<WellEntity> Wells { get; set; } = new List<WellEntity>();
     }
 }
