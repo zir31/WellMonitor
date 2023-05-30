@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellMonitor.WebApi", "WellMonitor.WebApi\WellMonitor.WebApi.csproj", "{E6CE83EE-B230-432A-A547-E8239CA3B13D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellMonitor.WebApi", "WellMonitor.WebApi\WellMonitor.WebApi.csproj", "{E6CE83EE-B230-432A-A547-E8239CA3B13D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WellMonitor.Core", "WellMonitor.Core", "{01E73130-FA82-4994-BA87-75FF732A68F6}"
 EndProject
@@ -11,9 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WellMonitor.Infrastructure"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WellMonitor.Application", "WellMonitor.Application", "{2DE649E5-A496-4A48-BFE2-DF1F4A45367B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellMonitor.Core", "WellMonitor.Core\WellMonitor.Core.csproj", "{5A080C5B-5DD1-46AC-8DA7-856546B9AC2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellMonitor.Core", "WellMonitor.Core\WellMonitor.Core.csproj", "{5A080C5B-5DD1-46AC-8DA7-856546B9AC2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellMonitor.Infrastructure", "WellMonitor.Infrastructure\WellMonitor.Infrastructure.csproj", "{4CA99D07-FC76-4436-9650-4739F894665A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellMonitor.Infrastructure", "WellMonitor.Infrastructure\WellMonitor.Infrastructure.csproj", "{4CA99D07-FC76-4436-9650-4739F894665A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellMonitor.Application", "WellMonitor.Application\WellMonitor.Application.csproj", "{0D104076-0667-40FD-AE4C-809D5FBBB59C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4CA99D07-FC76-4436-9650-4739F894665A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CA99D07-FC76-4436-9650-4739F894665A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CA99D07-FC76-4436-9650-4739F894665A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D104076-0667-40FD-AE4C-809D5FBBB59C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D104076-0667-40FD-AE4C-809D5FBBB59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D104076-0667-40FD-AE4C-809D5FBBB59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D104076-0667-40FD-AE4C-809D5FBBB59C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5A080C5B-5DD1-46AC-8DA7-856546B9AC2F} = {01E73130-FA82-4994-BA87-75FF732A68F6}
 		{4CA99D07-FC76-4436-9650-4739F894665A} = {1A0B6CF3-1D5D-4F99-BE85-A931C3C3CC90}
+		{0D104076-0667-40FD-AE4C-809D5FBBB59C} = {2DE649E5-A496-4A48-BFE2-DF1F4A45367B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5FE81C6E-D224-440F-804F-DB3BEDE8D628}

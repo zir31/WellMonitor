@@ -17,38 +17,8 @@ namespace WellMonitor.Infrastructure.Helpers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        //public void Run()
-        //{
-        //    if (_options.Value.EnsureDeleted)
-        //    {
-        //        _context.Database.EnsureDeleted();
-        //        _logger.LogInformation("The {1} database has been deleted", _context.Database.ProviderName);
-        //    }
-
-        //    if (_options.Value.Migrate)
-        //    {
-        //        if (_context.Database.GetMigrations().Any())
-        //        {
-        //            _context.Database.Migrate();
-        //        }
-        //        else
-        //        {
-        //            _context.Database.EnsureCreated();
-        //        }
-        //    }
-
-        //    if (_options.Value.Seed)
-        //    {
-        //        var demoDataDbSeeder = new LocalFilesDbSeeder(_context, _dbSeederNamespaceOptions.Value);
-
-        //        demoDataDbSeeder.SeedIfDbNotEmpty = false;
-        //        demoDataDbSeeder.SeedLocal(_options.Value.RelativePathToDemoData);
-        //    }
-        //}
-
         public async Task InitializeAsync()
         {
-            
             try
             {
                 _context.Database.EnsureDeleted();
@@ -104,14 +74,14 @@ namespace WellMonitor.Infrastructure.Helpers
                     Id = 1,
                     Name = "First Well",
                     Id_company = 1,
-                    Active = false
+                    Active = true
                     },
                     new WellEntity
                     {
                         Id = 2,
                         Name = "Second Well",
                         Id_company = 1,
-                        Active = false
+                        Active = true
                     },
                     new WellEntity
                     {
@@ -119,6 +89,42 @@ namespace WellMonitor.Infrastructure.Helpers
                         Name = "Third Well",
                         Id_company = 2,
                         Active = false
+                    }
+                    );
+
+                await _context.SaveChangesAsync();
+            }
+
+            if (!_context.t_telemetry.Any())
+            {
+                _context.t_telemetry.AddRange(
+                    new TelemetryEntity
+                    {
+                        Id = 1,
+                        WellId = 1,
+                        Date_time = DateTime.UtcNow.AddDays(-7),
+                        Depth = 100
+                    },
+                    new TelemetryEntity
+                    {
+                        Id = 2,
+                        WellId = 1,
+                        Date_time = DateTime.UtcNow.AddDays(-3),
+                        Depth = 150
+                    },
+                    new TelemetryEntity
+                    {
+                        Id = 3,
+                        WellId = 1,
+                        Date_time = DateTime.UtcNow.AddDays(-1),
+                        Depth = 175
+                    },
+                    new TelemetryEntity
+                    {
+                        Id = 4,
+                        WellId = 2,
+                        Date_time = DateTime.UtcNow.AddDays(-2),
+                        Depth = 440
                     }
                     );
 
