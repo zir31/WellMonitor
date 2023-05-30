@@ -10,8 +10,10 @@ namespace WellMonitor.Core.Entities
 
         public int Id_company { get; set; }
 
-        public int Id_telemetry { get; set; }
+        public CompanyEntity Company { get; set; }
 
-        public int Active { get; set; }
+        public bool Active { get; set; }
+
+        public IEnumerable<TelemetryEntity> Telemetries { get; set; } = new List<TelemetryEntity>();
     }
 }
