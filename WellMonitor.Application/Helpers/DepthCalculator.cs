@@ -6,7 +6,7 @@ namespace WellMonitor.Application.Helpers
     {
         public static float CalculatePassedDepth(this WellEntity well)
         {
-            if (well.Telemetries.Count() > 0)
+            if (well.Telemetries.Any())
                 return well.Telemetries.Max(w => w.Depth) - well.Telemetries.Min(w => w.Depth);
             
             return 0;

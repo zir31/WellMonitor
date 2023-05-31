@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using WellMonitor.Core.Entities;
 
 namespace WellMonitor.Infrastructure.Helpers
@@ -21,7 +20,6 @@ namespace WellMonitor.Infrastructure.Helpers
         {
             try
             {
-                _context.Database.EnsureDeleted();
                 await _context.Database.MigrateAsync();
             }
             catch (Exception ex)
@@ -46,11 +44,9 @@ namespace WellMonitor.Infrastructure.Helpers
 
         public async Task TrySeedAsync()
         {
-            // Default data
-            // Seed, if necessary
-            if (!_context.t_company.Any())
+            if (!_context.Companies.Any())
             {
-                _context.t_company.AddRange(
+                _context.Companies.AddRange(
                     new CompanyEntity
                     {
                         Id = 1,
@@ -66,9 +62,9 @@ namespace WellMonitor.Infrastructure.Helpers
                 await _context.SaveChangesAsync();
             }
 
-            if (!_context.t_well.Any())
+            if (!_context.Wells.Any())
             {
-                _context.t_well.AddRange(
+                _context.Wells.AddRange(
                     new WellEntity
                     {
                     Id = 1,
@@ -95,9 +91,9 @@ namespace WellMonitor.Infrastructure.Helpers
                 await _context.SaveChangesAsync();
             }
 
-            if (!_context.t_telemetry.Any())
+            if (!_context.Telemetries.Any())
             {
-                _context.t_telemetry.AddRange(
+                _context.Telemetries.AddRange(
                     new TelemetryEntity
                     {
                         Id = 1,
@@ -125,6 +121,26 @@ namespace WellMonitor.Infrastructure.Helpers
                         WellId = 2,
                         Date_time = DateTime.UtcNow.AddDays(-2),
                         Depth = 440
+                    }
+                    );
+
+                await _context.SaveChangesAsync();
+            }
+
+            if (!_context.WellActivityDeadlines.Any())
+            {
+                _context.WellActivityDeadlines.AddRange(
+                    new WellActivityDeadlineEntity
+                    {
+                        Id = 1,
+                        WellId = 1,
+                        Deadline = DateTime.UtcNow.AddDays(-2)
+                    },
+                    new WellActivityDeadlineEntity
+                    {
+                        Id = 2,
+                        WellId = 2,
+                        Deadline = DateTime.UtcNow.AddDays(3)
                     }
                     );
 

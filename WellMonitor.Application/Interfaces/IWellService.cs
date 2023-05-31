@@ -8,10 +8,10 @@ namespace WellMonitor.Application.Interfaces
 
         Task<IEnumerable<WellResponse>> GetActiveWellByCompanyIdOrCompanyNameAsync(int? id, string name);
 
-        Task<IEnumerable<WellResponse>> GetAllActiveWells();
+        Task<IEnumerable<WellResponse>> GetAllActiveWellsAsync();
 
-        Task<WellDepthResponse> GetWellWithDepthByIdBetweenDates(int id, DateTime startDate, DateTime endDate);
+        Task<WellDepthResponse> GetWellWithDepthByIdBetweenDatesAsync(int id, DateTime startDate, DateTime endDate);
 
-        Task<IEnumerable<WellDepthResponse>> GetActiveWellWithDepthByCompanyIdBetweenDates(int companyId, DateTime startDate, DateTime endDate);
+        Task<IEnumerable<WellDepthResponse>> GetActiveWellWithDepthByCompanyIdBetweenDatesAsync(int companyId, DateTime startDate, DateTime endDate);
     }
 }

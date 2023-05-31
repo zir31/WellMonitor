@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using WellMonitor.Application.Dtos.Telemetry;
-using WellMonitor.Application.Dtos.Well;
 using WellMonitor.Application.Interfaces;
 
 namespace WellMonitor.WebApi.Controllers.v1
@@ -19,26 +18,14 @@ namespace WellMonitor.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// Best endpoint ever
+        /// Добавляет показания телеметрии
         /// </summary>
-        /// <returns></returns>
+        /// <response code="200">Запрос был успешно обработан сервером</response>
+        /// <response code="500">На стороне сервера возникла внутренняя ошибка</response>
         [HttpPost]
         public async Task<IActionResult> AddTelemetries([FromBody]IEnumerable<TelemetryAddRequest> requests)
         {
             await _telemetryService.AddTelemetries(requests);
-
-            return Ok();
-        }
-
-        /// <summary>
-        /// Best endpoint ever
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("random")]
-        public async Task<IActionResult> GenerateRandomTelemetries()
-        {
-            await _telemetryService.GenerateRandomTelemetries();
 
             return Ok();
         }
