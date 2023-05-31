@@ -4,8 +4,8 @@
     {
         public int CompanyId { get; init; }
 
-        public DateTime DateStart { get; init; }
+        public DateTime DateStart { get; init; } = DateTime.UtcNow.AddDays(-10);
 
-        public DateTime DateEnd { get; init; }
+        public DateTime DateEnd { get; init; } = DateTime.UtcNow;
     }
 }

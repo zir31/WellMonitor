@@ -12,6 +12,9 @@ namespace WellMonitor.Infrastructure.Configuration
                 .HasKey(e => e.Id);
 
             builder
+                .ToTable("t_well_deadline");
+
+            builder
                 .Property(e => e.WellId)
                 .IsRequired();
 
@@ -21,7 +24,7 @@ namespace WellMonitor.Infrastructure.Configuration
 
             builder
                 .HasOne(e => e.Well)
-                .WithOne()
+                .WithOne(e => e.Deadline)
                 .HasForeignKey<WellActivityDeadlineEntity>(e => e.WellId);
         }
     }

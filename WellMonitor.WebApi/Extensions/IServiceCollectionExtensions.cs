@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Quartz;
 using Serilog;
 using System.Reflection;
 
@@ -51,6 +52,30 @@ namespace WellMonitor.WebApi.Extensions
                 opt.GroupNameFormat = "'v'VVV";
                 opt.SubstituteApiVersionInUrl = true;
             });
+        }
+
+        public static void AddJobAndTrigger<T>(
+        this IServiceCollectionQuartzConfigurator quartz)
+        where T : IJob
+        {
+            string jobName = typeof(T).Name;
+
+            var jobKey = new JobKey(jobName);
+
+            quartz.AddJob<T>(opts => opts.WithIdentity(jobKey));
+
+            quartz.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity(jobName + "-trigger")
+                .WithDailyTimeIntervalSchedule(
+                s => s.WithIntervalInHours(24)
+                .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(00, 00))));
+
+            quartz.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity(jobName + "-simple-trigger")
+                .WithSimpleSchedule()
+                .StartNow());
         }
     }
 }

@@ -18,11 +18,12 @@ namespace WellMonitor.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// Best endpoint ever
+        /// Предоставляет скважины по id подрядчика или по названию подрядчика
         /// </summary>
-        /// <returns></returns>
+        /// <response code="200">Запрос был успешно обработан сервером</response>
+        /// <response code="500">На стороне сервера возникла внутренняя ошибка</response>
         [HttpGet]
-        public async Task<IActionResult> GetWellByIdOrCompanyNameAsync([FromQuery]WellCompanyIdNameRequest request)
+        public async Task<IActionResult> GetWellByCompanyIdOrCompanyNameAsync([FromQuery]WellCompanyIdNameRequest request)
         {
             var entities = await _wellService.GetWellByCompanyIdOrCompanyNameAsync(request.Id, request.Name);
 
@@ -30,9 +31,10 @@ namespace WellMonitor.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// Best endpoint ever
+        /// Предоставляет активные скважины по id подрядчика или по названию подрядчика
         /// </summary>
-        /// <returns></returns>
+        /// <response code="200">Запрос был успешно обработан сервером</response>
+        /// <response code="500">На стороне сервера возникла внутренняя ошибка</response>
         [HttpGet]
         [Route("active")]
         public async Task<IActionResult> GetActiveWellByIdOrCompanyNameAsync([FromQuery] WellCompanyIdNameRequest request)
@@ -43,40 +45,44 @@ namespace WellMonitor.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// Best endpoint ever
+        /// Предоставляет активные скважины с работающими на них подрядчиками
         /// </summary>
-        /// <returns></returns>
+        /// <response code="200">Запрос был успешно обработан сервером</response>
+        /// <response code="500">На стороне сервера возникла внутренняя ошибка</response>
         [HttpGet]
         [Route("all/active")]
         public async Task<IActionResult> GetAllActiveWellsAsync()
         {
-            var entities = await _wellService.GetAllActiveWells();
+            var entities = await _wellService.GetAllActiveWellsAsync();
 
             return Ok(entities);
         }
 
         /// <summary>
-        /// Best endpoint ever
+        /// Предоставляет прохождение суммарной глубины скважины по id скважины и периоду
         /// </summary>
-        /// <returns></returns>
+        /// <response code="200">Запрос был успешно обработан сервером</response>
+        /// <response code="404">Скважина с данным id была не найдена</response>
+        /// <response code="500">На стороне сервера возникла внутренняя ошибка</response>
         [HttpGet]
         [Route("date-period")]
         public async Task<IActionResult> GetWellByIdBetweenDates([FromQuery]WellIdTimePeriodRequest request)
         {
-            var entity = await _wellService.GetWellWithDepthByIdBetweenDates(request.Id, request.DateStart, request.DateEnd);
+            var entity = await _wellService.GetWellWithDepthByIdBetweenDatesAsync(request.Id, request.DateStart, request.DateEnd);
 
             return Ok(entity);
         }
 
         /// <summary>
-        /// Best endpoint ever
+        /// Предоставляет активные скважины с прохождением суммарной глубины по id компании
         /// </summary>
-        /// <returns></returns>
+        /// <response code="200">Запрос был успешно обработан сервером</response>
+        /// <response code="500">На стороне сервера возникла внутренняя ошибка</response>
         [HttpGet]
         [Route("active-date-period")]
         public async Task<IActionResult> GetActiveWellsByCompanyIdBetweenDates([FromQuery] WellCompanyIdTimePeriodRequest request)
         {
-            var entity = await _wellService.GetActiveWellWithDepthByCompanyIdBetweenDates(request.CompanyId, request.DateStart, request.DateEnd);
+            var entity = await _wellService.GetActiveWellWithDepthByCompanyIdBetweenDatesAsync(request.CompanyId, request.DateStart, request.DateEnd);
 
             return Ok(entity);
         }

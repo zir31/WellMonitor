@@ -15,5 +15,7 @@ namespace WellMonitor.Core.Entities
         public bool Active { get; set; }
 
         public IEnumerable<TelemetryEntity> Telemetries { get; set; } = new List<TelemetryEntity>();
+
+        public WellActivityDeadlineEntity? Deadline { get; set; }
     }
 }

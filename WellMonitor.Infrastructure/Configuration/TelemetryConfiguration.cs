@@ -12,6 +12,9 @@ namespace WellMonitor.Infrastructure.Configuration
                 .HasKey(t => t.Id);
 
             builder
+                .ToTable("t_telemetry");
+
+            builder
                 .Property(t => t.Date_time)
                 .IsRequired();
 

@@ -12,6 +12,9 @@ namespace WellMonitor.Infrastructure.Configuration
                 .HasKey(w => w.Id);
 
             builder
+                .ToTable("t_well");
+
+            builder
                 .Property(w => w.Name);
 
             builder

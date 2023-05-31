@@ -2,6 +2,7 @@
 using WellMonitor.Application.Dtos.Telemetry;
 using WellMonitor.Application.Interfaces;
 using WellMonitor.Core.Entities;
+using WellMonitor.Core.Exceptions;
 using WellMonitor.Core.Interfaces;
 using WellMonitor.Core.Specifications.Well;
 
@@ -20,16 +21,33 @@ namespace WellMonitor.Application.Services
 
         public async Task AddTelemetries(IEnumerable<TelemetryAddRequest> requests)
         {
-            var entities = _mapper.Map<IEnumerable<TelemetryEntity>>(requests);
+            foreach (var request in requests)
+            {
+                var spec = new WellByIdSpecification(request.WellId);
+                var wells = await _unitOfWork.WellRepository.FindWithSpecificationPatternAsync(spec, false);
 
-            _unitOfWork.TelemetryRepository.CreateRange(entities);
+                var well = wells.SingleOrDefault() ?? throw new EntityNotFoundException(nameof(WellEntity), $"id = {request.WellId}");
 
+                if (!well.Telemetries.Any() || request.Depth >= well.Telemetries.Max(t => t.Depth))
+                {
+                    well.Deadline = new WellActivityDeadlineEntity()
+                    {
+                        WellId = well.Id,
+                        Deadline = DateTime.UtcNow.Date.AddDays(5)
+                    };
+                    well.Active = true;
+
+                    _unitOfWork.WellRepository.Update(well);
+                    _unitOfWork.TelemetryRepository.Create(_mapper.Map<TelemetryEntity>(request));
+                }
+            }
+            
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task GenerateRandomTelemetries()
+        private async Task GenerateRandomTelemetries()
         {
-            var spec = new WellWithTelemetriesSpecification();
+            var spec = new WellWithDeadlinesSpecification();
             var wells = await _unitOfWork.WellRepository.FindWithSpecificationPatternAsync(spec);
 
             var random = new Random();

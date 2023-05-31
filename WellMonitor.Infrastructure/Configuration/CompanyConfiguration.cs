@@ -12,6 +12,9 @@ namespace WellMonitor.Infrastructure.Configuration
                 .HasKey(c => c.Id);
 
             builder
+                .ToTable("t_company");
+
+            builder
                 .Property(c => c.Name)
                 .IsRequired();
         }

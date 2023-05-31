@@ -6,7 +6,5 @@ namespace WellMonitor.Application.Interfaces
     public interface ITelemetryService
     {
         Task AddTelemetries(IEnumerable<TelemetryAddRequest> requests);
-
-        Task GenerateRandomTelemetries();
     }
 }

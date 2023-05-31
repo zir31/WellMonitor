@@ -23,7 +23,7 @@ namespace WellMonitor.Application.Services
         {
             var spec = new WellActiveByCompanyIdOrNameSpecification(id, name);
 
-            var wells = await _unitOfWork.WellRepository.FindWithSpecificationPatternAsync(spec);
+            var wells = await _unitOfWork.WellRepository.FindWithSpecificationPatternAsync(spec, true);
 
             return _mapper.Map<IEnumerable<WellResponse>>(wells);
         }
@@ -37,7 +37,7 @@ namespace WellMonitor.Application.Services
             return _mapper.Map<IEnumerable<WellResponse>>(wells);
         }
 
-        public async Task<IEnumerable<WellResponse>> GetAllActiveWells()
+        public async Task<IEnumerable<WellResponse>> GetAllActiveWellsAsync()
         {
             var spec = new WellActiveSpecification();
 
@@ -46,7 +46,7 @@ namespace WellMonitor.Application.Services
             return _mapper.Map<IEnumerable<WellResponse>>(wells);
         }
 
-        public async Task<WellDepthResponse> GetWellWithDepthByIdBetweenDates(int id, DateTime startDate, DateTime endDate)
+        public async Task<WellDepthResponse> GetWellWithDepthByIdBetweenDatesAsync(int id, DateTime startDate, DateTime endDate)
         {
             var spec = new WellByIdBetweenDatesSpecification(id, startDate.Date, endDate.Date.AddDays(1));
 
@@ -56,7 +56,7 @@ namespace WellMonitor.Application.Services
             return _mapper.Map<WellDepthResponse>(well);
         }
 
-        public async Task<IEnumerable<WellDepthResponse>> GetActiveWellWithDepthByCompanyIdBetweenDates(int companyId, DateTime startDate, DateTime endDate)
+        public async Task<IEnumerable<WellDepthResponse>> GetActiveWellWithDepthByCompanyIdBetweenDatesAsync(int companyId, DateTime startDate, DateTime endDate)
         {
             var spec = new WellActiveByCompanyIdBetweenDatesSpecification(companyId, startDate.Date, endDate.Date.AddDays(1));
 

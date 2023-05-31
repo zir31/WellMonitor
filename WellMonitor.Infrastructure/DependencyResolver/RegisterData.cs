@@ -20,9 +20,6 @@ namespace WellMonitor.Infrastructure.DependencyResolver
             services.AddScoped<IRepositoryBase<WellActivityDeadlineEntity>, WellActivityDeadlineRepository>();
             services.AddScoped<IUnitOfWork, ApplicationUnitOfWork>();
             services.AddTransient<DbInitializer>();
-            //services.Configure<DbInitializationOptions>(options =>
-            //    configuration.GetSection(DbInitializationOptions.DbInitialization).Bind(options));
-            //services.Configure<DbSeederNamespaceOptions>(options => configuration.GetSection(DbSeederNamespaceOptions.DbSeederNamespaces).Bind(options));
         }
     }
 }
